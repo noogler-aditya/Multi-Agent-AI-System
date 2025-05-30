@@ -24,20 +24,20 @@ flowchart TD
     C1 --> D1{Format Type}
     C2 --> D2{Intent Type}
 
-    D1 -->|PDF| PDF_Agent[PDF Agent (Optional)]
-    D1 -->|JSON| JSON_Agent[JSON Agent]
-    D1 -->|Email| Email_Agent[Email Agent]
+    D1 -->|PDF| PDFAgent("PDF Agent (Optional)")
+    D1 -->|JSON| JSONAgent("JSON Agent")
+    D1 -->|Email| EmailAgent("Email Agent")
 
-    D2 -->|Invoice| Process_Invoice[Process Invoice]
-    D2 -->|RFQ| Process_RFQ[Process RFQ]
-    D2 -->|Complaint| Process_Complaint[Process Complaint]
+    D2 -->|Invoice| ProcessInvoice("Process Invoice")
+    D2 -->|RFQ| ProcessRFQ("Process RFQ")
+    D2 -->|Complaint| ProcessComplaint("Process Complaint")
 
-    JSON_Agent --> M[Shared Memory Module]
-    Email_Agent --> M
-    PDF_Agent --> M
-    Process_Invoice --> M
-    Process_RFQ --> M
-    Process_Complaint --> M
+    JSONAgent --> M[Shared Memory Module]
+    EmailAgent --> M
+    PDFAgent --> M
+    ProcessInvoice --> M
+    ProcessRFQ --> M
+    ProcessComplaint --> M
 
 ```
 
