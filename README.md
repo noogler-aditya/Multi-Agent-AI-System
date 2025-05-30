@@ -1,9 +1,6 @@
 # 🧠 Multi-Agent AI System for Input Classification & Routing
 
 This project is a **multi-agent AI pipeline** designed to classify inputs (PDF, JSON, Email), detect their intent (e.g., Invoice, Complaint), and route them to specialized agents. The system maintains a **shared memory** for traceability and enables seamless processing across agents.
-
-> ✅ Developed as part of an internship selection assignment.
-
 ---
 
 ## 🚀 Features
@@ -19,15 +16,29 @@ This project is a **multi-agent AI pipeline** designed to classify inputs (PDF, 
 ## 🧱 System Architecture
 
 ```mermaid
-graph TD
-    A[User Input: PDF / JSON / Email] --> B[Classifier Agent]
-    B --> C{Format + Intent?}
-    C -->|PDF+Invoice| D[PDF Agent (optional)]
-    C -->|JSON+RFQ| E[JSON Agent]
-    C -->|Email+Complaint| F[Email Agent]
-    D --> G[Shared Memory Module]
-    E --> G
-    F --> G
+flowchart TD
+    A[User Input: PDF, JSON, Email] --> B[Classifier Agent]
+    B --> C1[Detect Format]
+    B --> C2[Detect Intent]
+    B --> C3[Log to Shared Memory]
+    C1 --> D1{Format Type}
+    C2 --> D2{Intent Type}
+
+    D1 -->|PDF| PDF_Agent[PDF Agent (Optional)]
+    D1 -->|JSON| JSON_Agent[JSON Agent]
+    D1 -->|Email| Email_Agent[Email Agent]
+
+    D2 -->|Invoice| Process_Invoice[Process Invoice]
+    D2 -->|RFQ| Process_RFQ[Process RFQ]
+    D2 -->|Complaint| Process_Complaint[Process Complaint]
+
+    JSON_Agent --> M[Shared Memory Module]
+    Email_Agent --> M
+    PDF_Agent --> M
+    Process_Invoice --> M
+    Process_RFQ --> M
+    Process_Complaint --> M
+
 ```
 
 ---
@@ -116,8 +127,8 @@ multi-agent-system/
 ├── tests/
 │   └── sample_inputs/
 │       ├── invoice.json
-│       ├── complaint_email.txt
-│       └── regulation.pdf
+│       ├── sample_email.txt
+│       └── sample_invoice.pdf
 ├── main.py
 ├── requirements.txt
 └── README.md
@@ -137,7 +148,7 @@ multi-agent-system/
 ## 🛠️ Tech Stack
 
 - **Language**: Python 3.10+
-- **LLMs**: OpenAI API / HuggingFace Transformers
+- **LLMs**: Gemini AI
 - **Memory Backend**: SQLite
 - **Utilities**: `pdfminer`, `email`, `json`, `sqlite3`
 
@@ -169,12 +180,5 @@ python main.py sample_inputs/complaint_email.txt
 - Web dashboard for memory visualization
 - Redis-based scalable memory module
 - Add multilingual support
-
----
-
-## 🤝 Contact
-
-Created by **Aditya Kumar** as part of an internship evaluation project.  
-📧 aditya.kumar@email.com | [LinkedIn](https://linkedin.com/in/adityakumar)
 
 ---
