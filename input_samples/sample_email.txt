@@ -1,0 +1,5 @@
+From: john@example.com
+Subject: Request for Quotation
+
+Hi, please send the quotation for the items discussed.
+This is urgent and needs to be processed ASAP.
