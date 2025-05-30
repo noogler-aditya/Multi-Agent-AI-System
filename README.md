@@ -120,10 +120,11 @@ multi-agent-system/
 │   ├── classifier_agent.py
 │   ├── json_agent.py
 │   └── email_agent.py
+|   |__ pdf_agent.py
 ├── memory/
 │   └── shared_memory.py (SQLite-backed)
 ├── utils/
-│   └── format_detector.py
+│   └── llm_utils.py
 ├── tests/
 │   └── sample_inputs/
 │       ├── invoice.json
